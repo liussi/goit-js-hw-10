@@ -33,29 +33,12 @@ export const fetchCatByBreed = (breedId) => {
   });
 }
 
+export function showElement(element) {
+  element.style.display = 'block';
+}
+
+export function hideElement(element) {
+  element.style.display = 'none';
+}
 
 
-
-
-
-
-
-// import axios from "axios";
-
-// const API_KEY = "live_ZXPG0QRSYqBY2aSBeLEhQJkOW5riU7dnDWfXA3dN5D2cEW8gfClyctizlpBSN5cL";
-// axios.defaults.headers.common["x-api-key"] = API_KEY;
-
-// export function fetchCatByBreed(breedId) {
-//   return axios.get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
-//     .then(response => {
-//       if (response.status !== 200 || !response.data || response.data.length === 0) {
-//         throw new Error("Кота з такою породою не знайдено.");
-//       }
-//       return response.data[0]; // Повертаємо перший елемент масиву, який містить інформацію про кота
-//     })
-//     .catch(error => {
-//       throw new Error("Помилка при отриманні даних про кота.");
-//     });
-// }
-
-  
