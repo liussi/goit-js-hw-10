@@ -1,12 +1,12 @@
 import axios from "axios";
-
+import Notiflix from 'notiflix';
 const BASE_URL = "https://api.thecatapi.com/v1";
 
 export const fetchBreeds = () => {
   return axios.get(`${BASE_URL}/breeds`)
     .then(response => response.data)
     .catch(error => {
-      throw new Error("Помилка при отриманні порід");
+      throw new Error("Oops! Something went wrong! Try reloading the page!");
     });
 };
 
@@ -15,7 +15,7 @@ export const fetchCatByBreed = (breedId) => {
 //   return axios.get(`https://api.thecatapi.com/v1/breeds`)
   .then(response => {
     if (response.status !== 200 || !response.data || response.data.length === 0) {
-      throw new Error("Помилка при отриманні даних про породи котів.");
+      throw new Error("Oops! Something went wrong! Try reloading the page!");
     }
     const breedsData = response.data;
 
@@ -23,13 +23,13 @@ export const fetchCatByBreed = (breedId) => {
     const selectedBreed = breedsData.find(breed => breed.id === breedId);
 
     if (!selectedBreed) {
-      throw new Error("Кота з такою породою не знайдено.");
+      throw new Error("Oops! Something went wrong! Try reloading the page!");
     }
 
     return selectedBreed;
   })
   .catch(error => {
-    throw new Error("Помилка при отриманні даних про кота.");
+    Notiflix.Notify.failure("Oops! Something went wrong! Try reloading the page!");
   });
 }
 

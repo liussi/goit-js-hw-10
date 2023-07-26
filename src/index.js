@@ -1,11 +1,12 @@
 import axios from "axios";
 import { fetchBreeds, fetchCatByBreed,showElement,hideElement} from "./cat-api";
 import SlimSelect from 'slim-select'
-
+import Notiflix from 'notiflix';
 
 const API_KEY = "live_ZXPG0QRSYqBY2aSBeLEhQJkOW5riU7dnDWfXA3dN5D2cEW8gfClyctizlpBSN5cL";
 const catInfo = document.querySelector('.cat-info');
-const breedSelect = document.querySelector('#single');
+const breedSelect = document.querySelector('.breed-select');
+// const breedSelect = document.querySelector('#selectElement');
 console.log(breedSelect)
 const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
@@ -17,9 +18,7 @@ showElement(loader);
 hideElement(breedSelect);
 hideElement(error);  
 
-new SlimSelect({
-  select: '#single'
-})
+
 
 
 fetchBreeds()
@@ -37,19 +36,21 @@ fetchBreeds()
       breedSelect.appendChild(option);
     });
    showElement(breedSelect);
+
    hideElement(loader);
 
-     
+
   })
    .catch(error => {
    hideElement(loader);  
+
    showElement(error);   
-    console.error("Помилка при отриманні порід:", error);
+    Notiflix.Notify.failure("Oops! Something went wrong! Try reloading the page!", error);
   });
 
 
 showElement(loader);
-hideElement(catInfo);
+// hideElement(catInfo);
 
 
 breedSelect.addEventListener('input', () => {
@@ -63,10 +64,13 @@ breedSelect.addEventListener('input', () => {
        const { description, temperament, image :{url}, name } = catData;
 
       const markup = `
-        <img src="${url}" alt="${name}" width="200px">
+        <img src="${url}" alt="${name}" width="500px">
+        <div>
         <h2>${name}</h2>
         <p>${description}</p>
-        <p>Temperament:${temperament}</p>
+        <p><strong>Temperament:</strong>&nbsp; ${temperament}</p>
+        </div>
+       
       `;
 
       catInfo.innerHTML = markup;
@@ -77,13 +81,14 @@ showElement(catInfo);
 hideElement(loader);
       })
       .catch(error => {
-        console.error("Помилка при отриманні даних про кота:", error);
-        catInfo.innerHTML = ""; // Очищення блоку catInfo
-         hideElement(loader);
-         showElement(error);
+        Notiflix.Notify.failure("Помилка при отриманні даних про кота:", error);
+        catInfo.innerHTML = "";
+        //  hideElement(loader);
+        showElement(error);
+        showElement(loader);
 
       });
   } else {
-    catInfo.innerHTML = ""; // Очищення блоку catInfo
+    catInfo.innerHTML = "";
   }
 });
