@@ -2,7 +2,9 @@ import axios from "axios";
 import { showElement, hideElement, handleError } from './downloads-processing';
 import {BASE_URL, API_KEY,  catInfo, breedSelect, loader, error } from './variables'
 
- axios.defaults.headers.common["x-api-key"] = API_KEY;
+
+axios.defaults.headers.common["x-api-key"] = API_KEY;
+
 
 export const fetchBreeds = () => {
   showElement(loader);
@@ -52,11 +54,13 @@ export const fetchCatByBreed = (breedId) => {
         description, temperament, name }]} = data[0];
         
         const markup = `
-        <img src="${url}" alt="${name}" width="500px" height ='400px'>
         <div class='wrapper'>
-        <h2>${name}</h2>
+        <img src="${url}" alt="${name}" width="500px" height ='400px'>
+         <div>
+       <h2>${name}</h2>
         <p>${description}</p>
         <p><strong>Temperament:</strong>&nbsp; ${temperament}</p>
+        </div>
         </div>
         
         `;

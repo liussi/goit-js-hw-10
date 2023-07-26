@@ -54,17 +54,11 @@ margin-top: 20px;
 margin-left: 20px;
 }
 
-.cat-info {
-  margin-left: 20px;
-  margin-top: 20px;
-}
 
 .wrapper {
-  // display: flex! important;
-  display: inline-block;
-    width: 300px px;
-    
-    margin: 20px;
+  display: flex;
+  gap: 20px;
+  margin: 20px;
 
     h2 {
         margin: 0;
